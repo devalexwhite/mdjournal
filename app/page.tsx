@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import { headers } from "next/headers";
 import Uploader from "@/components/Uploader";
 import Link from "next/link";
+import Footer from "@/components/Footer";
 
 export default async function Index() {
   const origin = headers().get("origin");
@@ -25,19 +26,7 @@ export default async function Index() {
         </main>
       </div>
 
-      <footer className="w-full border-t border-t-foreground/10 p-8 flex justify-center text-center text-xs">
-        <p>
-          An app by{" "}
-          <a
-            href="https://github.com/devalexwhite"
-            target="_blank"
-            className="font-bold hover:underline"
-            rel="noreferrer"
-          >
-            Alex White
-          </a>
-        </p>
-      </footer>
+      <Footer />
     </div>
   );
 }

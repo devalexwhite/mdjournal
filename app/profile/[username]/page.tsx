@@ -1,6 +1,7 @@
 "use client";
 
 import AuthButton from "@/components/AuthButton";
+import Footer from "@/components/Footer";
 import Posts from "@/components/Posts";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { User } from "@supabase/supabase-js";
@@ -79,19 +80,7 @@ export default function Page({ params }: { params: { username: string } }) {
         </div>
       )}
 
-      <footer className="w-full border-t border-t-foreground/10 p-8 flex justify-center text-center text-xs">
-        <p>
-          An app by{" "}
-          <a
-            href="https://github.com/devalexwhite"
-            target="_blank"
-            className="font-bold hover:underline"
-            rel="noreferrer"
-          >
-            Alex White
-          </a>
-        </p>
-      </footer>
+      <Footer />
     </div>
   );
 }

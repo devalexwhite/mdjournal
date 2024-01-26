@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 export default function Page({ params }: { params: { username: string } }) {
     const [user, setUser] = useState<User | null>(null) as [User | null, Function]
     const [userProfile, setUserProfile] = useState({}) as [any, Function];
+    const [loadedUser, setLoadedUser] = useState(false) as [boolean, Function];
 
     const supabase = createClientComponentClient()
 
@@ -19,6 +20,7 @@ export default function Page({ params }: { params: { username: string } }) {
         if (user?.data) {
             setUser(user.data.user)
         }
+        setLoadedUser(true)
     }
 
     const getProfile = async () => {
@@ -57,7 +59,7 @@ export default function Page({ params }: { params: { username: string } }) {
             </nav>
 
             {
-                user?.id && userProfile?.id &&
+                loadedUser && userProfile?.id &&
                 <div className="animate-in flex-1 flex flex-col gap-20 opacity-0 max-w-4xl w-full px-3">
 
                     <main className="flex-1 flex flex-col gap-6">

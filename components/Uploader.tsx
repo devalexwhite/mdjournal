@@ -95,7 +95,7 @@ export default function Uploader({ authCallback }: { authCallback: string }) {
           disabled={uploading}
           onClick={onUpload}
           className={`w-full py-4 border border-solid border-gray-700 dark:border-gray-100 px-6 transition-all ${
-            uploading ? "" : "hover:bg-blue-100 group"
+            uploading ? "" : "hover:bg-blue-100 hover:dark:bg-blue-600 group"
           }`}
         >
           {!uploading && (

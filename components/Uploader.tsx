@@ -2,16 +2,15 @@
 
 import { useEffect, useState } from "react";
 import MdDropzone from "./MdDropzone";
-import {
-  User,
-  createClientComponentClient,
-} from "@supabase/auth-helpers-nextjs";
+import { User } from "@supabase/auth-helpers-nextjs";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { RedirectType, redirect, useRouter } from "next/navigation";
+import { createClient } from "@/utils/supabase/client";
 
 const VALID_FILE_EXTENSIONS = {
   "text/markdown": [".md", ".markdown"],
+  "text/plain": [".txt"],
 };
 
 export default function Uploader({ authCallback }: { authCallback: string }) {
@@ -26,7 +25,7 @@ export default function Uploader({ authCallback }: { authCallback: string }) {
 
   const router = useRouter();
 
-  const supabase = createClientComponentClient();
+  const supabase = createClient();
 
   const getUser = async () => {
     const user = await supabase.auth.getUser();

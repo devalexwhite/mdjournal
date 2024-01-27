@@ -2,11 +2,11 @@
 
 import AuthButton from "@/components/AuthButton";
 import Footer from "@/components/Footer";
+import LoadingSpinner from "@/components/LoadingSpinner";
 import Posts from "@/components/Posts";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createClient } from "@/utils/supabase/client";
 import { User } from "@supabase/supabase-js";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function Page({ params }: { params: { username: string } }) {
@@ -17,7 +17,7 @@ export default function Page({ params }: { params: { username: string } }) {
   const [userProfile, setUserProfile] = useState({}) as [any, Function];
   const [loadedUser, setLoadedUser] = useState(false) as [boolean, Function];
 
-  const supabase = createClientComponentClient();
+  const supabase = createClient();
 
   const getUser = async () => {
     const user = await supabase.auth.getUser();
@@ -65,7 +65,12 @@ export default function Page({ params }: { params: { username: string } }) {
           {<AuthButton />}
         </div>
       </nav>
-
+      {!loadedUser ||
+        (!userProfile?.id && (
+          <div className="w-full py-32 flex items-center justify-center">
+            <LoadingSpinner />
+          </div>
+        ))}
       {loadedUser && userProfile?.id && (
         <div className="animate-in flex-1 flex flex-col gap-20 opacity-0 max-w-4xl w-full px-3">
           <main className="flex-1 flex flex-col gap-6">
@@ -96,7 +101,6 @@ export default function Page({ params }: { params: { username: string } }) {
           </main>
         </div>
       )}
-
       <Footer />
     </div>
   );

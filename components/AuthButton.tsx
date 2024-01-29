@@ -46,7 +46,7 @@ export default function AuthButton() {
                 Hey, <Link className="underline" href={`/profile/${user.user_metadata['full_name']}`}>{user.email}</Link>!
               </div>
               <form action={signOut}>
-                <button className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover">
+                <button className="btn btn-neutral btn-sm">
                   Logout
                 </button>
               </form>
@@ -54,7 +54,7 @@ export default function AuthButton() {
         ) : (<div>
           <Link
             href="/login"
-            className="py-2 px-3 flex rounded-md no-underline bg-btn-background hover:bg-btn-background-hover"
+            className="btn btn-primary btn-sm"
           >
             Login
           </Link>

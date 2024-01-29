@@ -20,7 +20,7 @@ export default function Posts({
       .from("posts")
       .select("*")
       .eq("user_id", uid)
-      .order("updated_at", { ascending: true });
+      .order("updated_at", { ascending: false });
 
     if (error) {
       console.error(error);

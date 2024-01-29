@@ -1,6 +1,7 @@
 import AuthButton from "@/components/AuthButton";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import Navbar from "@/components/Navbar";
 import Post from "@/components/Post";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
@@ -31,14 +32,7 @@ export default async function Page({
 
   return (
     <div className="flex-1 w-full flex flex-col gap-20 items-center px-4">
-      <nav className="w-full flex justify-center border-b border-b-foreground/10">
-        <div className="w-full max-w-4xl flex justify-between sm:items-center p-3 text-sm flex-col sm:flex-row">
-          <Link href="/">
-            <div className="font-black text-lg">mdJournal</div>
-          </Link>
-          {<AuthButton />}
-        </div>
-      </nav>
+      <Navbar />
       <main className="mb-16 w-full max-w-3xl">
         <header className="border-b border-solid border-gray-600 dark:border-gray-200 py-4 mb-16 w-full flex flex-row justify-between items-end">
           <div className="flex flex-col">
@@ -63,7 +57,7 @@ export default async function Page({
             <a
               href={`${downloadURL.publicUrl}`}
               target="_blank"
-              className="font-medium underline text-lg text-gray-800 dark:text-white flex flex-row items-center gap-2"
+              className="btn-secondary btn btn-sm"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

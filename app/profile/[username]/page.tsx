@@ -153,12 +153,16 @@ export default function Page({ params }: { params: { username: string } }) {
             ) : (
               <section>
                 <header className="w-full flex flex-col sm:flex-row sm:items-center justify-between mb-8">
-                  <h1 className="text-2xl">{userProfile.full_name}'s posts.</h1>
+                  <h3 className="text-2xl">
+                    {userProfile?.full_name}'s posts.
+                  </h3>
+                </header>
+                <main>
                   <Posts
                     uid={userProfile?.id}
                     username={userProfile?.full_name}
                   />
-                </header>
+                </main>
               </section>
             )}
           </main>

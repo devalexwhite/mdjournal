@@ -98,7 +98,6 @@ export default function Page({ params }: { params: { username: string } }) {
                             viewBox="0 0 24 24"
                             strokeWidth="1.5"
                             stroke="currentColor"
-                            ariaHidden="true"
                             data-slot="icon"
                             className="w-8 h-8"
                           >
@@ -125,7 +124,6 @@ export default function Page({ params }: { params: { username: string } }) {
                             viewBox="0 0 24 24"
                             strokeWidth="1.5"
                             stroke="currentColor"
-                            ariaHidden="true"
                             data-slot="icon"
                             className="w-8 h-8"
                           >

@@ -20,7 +20,7 @@ export default function Posts({
       .from("posts")
       .select("*")
       .eq("user_id", uid)
-      .order("updated_at", { ascending: true });
+      .order("updated_at", { ascending: false });
 
     if (error) {
       console.error(error);
@@ -48,11 +48,11 @@ export default function Posts({
             <li key={post.id} className="w-full block animate-in">
               <Link
                 href={`/posts/${username}/${post.id}`}
-                className="block w-full border border-solid border-gray-700 px-4 py-2 dark:border-gray-100 hover:bg-blue-100 hover:dark:bg-blue-600 flex justify-between items-center"
+                className="w-full border border-solid border-accent px-4 py-2 hover:bg-accent flex justify-between items-center group"
               >
                 <div className="flex flex-col">
                   {post.original_file_name}
-                  <span className="text-sm text-gray-600 dark:text-gray-200">
+                  <span className="text-sm ">
                     {new Date(post.updated_at).toDateString()}
                   </span>
                 </div>

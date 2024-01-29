@@ -58,9 +58,11 @@ export default function Uploader({ authCallback }: { authCallback: string }) {
       const fileExt = file.name.split(".").pop();
       const filePath = `${user?.id}-${Math.random()}.${fileExt}`;
 
+      const text = await file.text();
+
       const { error: uploadError } = await supabase.storage
         .from("posts")
-        .upload(filePath, file);
+        .upload(filePath, text);
 
       if (uploadError) {
         console.error(uploadError);

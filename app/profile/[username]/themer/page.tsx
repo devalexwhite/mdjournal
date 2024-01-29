@@ -34,8 +34,8 @@ export default function Page() {
       setProfile(profile);
 
       setTheme(profile?.theme || "light");
-      setDownloadButton(profile?.download_button);
-      setProfileLink(profile?.profile_link);
+      setDownloadButton(profile?.show_download);
+      setProfileLink(profile?.show_profile_link);
     } else {
       router.push("/login");
     }

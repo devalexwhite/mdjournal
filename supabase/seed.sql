@@ -1,3 +1,8 @@
+insert into storage.buckets
+  (id, name)
+values
+  ('posts', 'posts');
+
 INSERT INTO
     auth.users (
         instance_id,

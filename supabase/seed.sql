@@ -29,7 +29,7 @@ INSERT INTO
             current_timestamp,
             current_timestamp,
             '{"provider":"email","providers":["email"]}',
-            '{}',
+            format('{"full_name": "User' || (ROW_NUMBER() OVER ()) || '"}')::jsonb,
             current_timestamp,
             current_timestamp,
             '',

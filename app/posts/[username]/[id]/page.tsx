@@ -37,7 +37,7 @@ export default async function Page({
       <Navbar />
       <main className="mb-16 w-full max-w-3xl">
         <header className=" py-4 w-full flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4 sm:gap-0">
-          <div className="flex flex-col">
+          <div className="flex flex-col flex-1">
             <h1 className="mb-2 text-4xl">{post.original_file_name}</h1>
             {profile?.show_profile_link && (
               <div>
@@ -62,7 +62,7 @@ export default async function Page({
               <a
                 href={`${downloadURL.publicUrl}`}
                 target="_blank"
-                className="btn-secondary btn btn-sm"
+                className="btn-secondary btn"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

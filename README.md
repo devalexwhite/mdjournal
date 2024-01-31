@@ -49,6 +49,10 @@ npm run dev
 
 You should now be able to access the project locally at `localhost:3000`.
 
+### Login
+
+The `seed.sql` file seeded 10 user accounts for you to use. They are all in the format of `user1@example.com`:`password123` where 1 is in 1-10.
+
 ### Storage
 
 - posts

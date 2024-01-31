@@ -2,6 +2,7 @@ import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import Script from "next/script";
 import { ScriptHTMLAttributes } from "react";
+import Head from "next/head";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://www.mdjournal.app`
@@ -35,13 +36,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={GeistSans.className}>
+      <Head key="analytics">
+        {process.env.VERCEL_URL && (
+          <UmamiScript dataWebsiteId={"2deed93c-9f2c-4446-ac6a-8bf2902f8772"} />
+        )}
+      </Head>
       <body className="bg-background text-foreground">
         <main className="min-h-screen flex flex-col items-center">
           {children}
         </main>
-        {process.env.VERCEL_URL && (
-          <UmamiScript dataWebsiteId={"2deed93c-9f2c-4446-ac6a-8bf2902f8772"} />
-        )}
       </body>
     </html>
   );

@@ -16,14 +16,38 @@ mdJournal is built using NextJS, Typescript, TailwindCSS and Supabase. The user 
 
 ## Local development
 
-Clone the repo, run an `npm install` followed by `npm run dev` to start the development server. You'll need a `.env.local` file with the following keys:
+### Supabase setup
+
+To develop locally, you'll need the Supbase CLI. Follow the insturctions [here](https://supabase.com/docs/guides/cli/getting-started) to install the CLI.
+
+Once install, open a terminal in the root directory of mdJournal. Run the following:
+
+```bash
+supabase start
+supabase db reset
+```
+
+This will start the local Supabase development environment and migrate the database. Take note of the terminal output. The 'Studio URL' provides a local Supabase interface for managing your database tables and authentication. You'll use this interface to manually create local users via the "authentication" tab.
+
+### Local server
+
+Create a '.env.local' file in the root directory of the project. Paste the following into the file:
 
 ```
-NEXT_PUBLIC_SUPABASE_URL: <YOUR SUPABASE URL>
-NEXT_PUBLIC_SUPABASE_ANON_KEY: <YOUR SUPABASE ANAON KEY>
+NEXT_PUBLIC_SUPABASE_URL = <API URL>
+NEXT_PUBLIC_SUPABASE_ANON_KEY = <ANON KEY>
 ```
 
-## Supabase setup
+Change "API URL" and "ANON KEY" to the values printed to the terminal when you ran `supabase start` in the previous step. You can also run `supabase status` to print these values when Supabase is running locally.
+
+Next, open a terminal in the root directory of the project and run the following to start the NextJS server:
+
+```bash
+npm install
+npm run dev
+```
+
+You should now be able to access the project locally at `localhost:3000`.
 
 ### Storage
 

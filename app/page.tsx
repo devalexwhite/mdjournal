@@ -5,6 +5,7 @@ import Uploader from "@/components/Uploader";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import LogoRenderer from "@/components/LogoRenderer";
 
 export default async function Index() {
   const origin = headers().get("origin");
@@ -14,6 +15,9 @@ export default async function Index() {
       <Navbar />
 
       <div className="animate-in flex-1 flex flex-col gap-20 opacity-0 max-w-4xl w-full px-3">
+        <div className="w-full h-60 mx-auto">
+          <LogoRenderer />
+        </div>
         <Header />
         <main className="flex-1 flex flex-col gap-6">
           <Uploader authCallback={`${origin}/auth/callback`} />

@@ -23,7 +23,7 @@ export default async function Index() {
             <div
               className="w-[300px] h-[300px] sm:w-[400px] sm:h-[400px]  mx-auto rounded-full"
               style={{
-                backgroundImage: "url('topography.svg')",
+                backgroundImage: "url('texture.svg')",
               }}
             />
           </div>

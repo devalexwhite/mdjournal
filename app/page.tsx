@@ -15,8 +15,18 @@ export default async function Index() {
       <Navbar />
 
       <div className="animate-in flex-1 flex flex-col gap-20 opacity-0 max-w-4xl w-full px-3">
-        <div className="w-full h-60 mx-auto">
-          <LogoRenderer />
+        <div className="w-full h-60 mx-auto relative my-16">
+          <div className="z-20 h-60 w-full relative ">
+            <LogoRenderer />
+          </div>
+          <div className="flex flex-row items-center justify-center absolute inset-0 z-10">
+            <div
+              className="w-[300px] h-[300px] sm:w-[400px] sm:h-[400px]  mx-auto rounded-full"
+              style={{
+                backgroundImage: "url('topography.svg')",
+              }}
+            />
+          </div>
         </div>
         <Header />
         <main className="flex-1 flex flex-col gap-6">

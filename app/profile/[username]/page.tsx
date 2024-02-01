@@ -1,77 +1,44 @@
-"use client";
-
-import AuthButton from "@/components/AuthButton";
 import Footer from "@/components/Footer";
-import LoadingSpinner from "@/components/LoadingSpinner";
 import Navbar from "@/components/Navbar";
 import Posts from "@/components/Posts";
-import { createClient } from "@/utils/supabase/client";
-import { User } from "@supabase/supabase-js";
+import { createClient } from "@/utils/supabase/server";
+import { cookies } from "next/headers";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-export default function Page({ params }: { params: { username: string } }) {
-  const [user, setUser] = useState<User | null>(null) as [
-    User | null,
-    Function
-  ];
-  const [userProfile, setUserProfile] = useState({}) as [any, Function];
-  const [loadedUser, setLoadedUser] = useState(false) as [boolean, Function];
+export default async function Page({
+  params: { username },
+}: {
+  params: { username: string };
+}) {
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
 
-  const supabase = createClient();
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select()
+    .eq("full_name", username)
+    .single();
 
-  const getUser = async () => {
-    const user = await supabase.auth.getUser();
+  const {
+    data: { user: user },
+  } = await supabase.auth.getUser();
 
-    if (user?.data) {
-      setUser(user.data.user);
-    }
-    setLoadedUser(true);
-  };
-
-  const getProfile = async () => {
-    const { data, error } = await supabase
-      .from("profiles")
-      .select("*")
-      .eq("full_name", params.username)
-      .single();
-
-    if (error) {
-      console.error(error);
-    } else {
-      setUserProfile(data);
-    }
-  };
-
-  useEffect(() => {
-    getUser();
-    getProfile();
-
-    supabase.auth.onAuthStateChange((event, session) => {
-      if (event == "SIGNED_IN" && session?.user) {
-        setUser(session.user);
-      } else if (event == "SIGNED_OUT") {
-        setUser(null);
-      }
-    });
-  }, []);
+  const { data: posts } = await supabase
+    .from("posts")
+    .select()
+    .eq("user_id", profile.id);
 
   return (
     <div
-      className="flex-1 w-full flex flex-col gap-20 items-center"
-      data-theme={userProfile.theme || "light"}
+      className="flex-1 w-full flex flex-col gap-20 items-center px-4"
+      data-theme={profile.theme || "light"}
     >
       <Navbar />
-      {!loadedUser ||
-        (!userProfile?.id && (
-          <div className="w-full py-32 flex items-center justify-center">
-            <LoadingSpinner />
-          </div>
-        ))}
-      {loadedUser && userProfile?.id && (
+      {profile?.id && (
         <div className="animate-in flex-1 flex flex-col gap-20 opacity-0 max-w-4xl w-full px-3">
           <main className="flex-1 flex flex-col space-y-16">
-            {userProfile?.id == user?.id ? (
+            {profile?.id == user?.id ? (
               <React.Fragment>
                 <section>
                   <header className="w-full flex flex-col sm:flex-row sm:items-center justify-between mb-8">
@@ -143,25 +110,17 @@ export default function Page({ params }: { params: { username: string } }) {
                     <h3 className="text-2xl">your posts.</h3>
                   </header>
                   <main>
-                    <Posts
-                      uid={userProfile?.id}
-                      username={userProfile?.full_name}
-                    />
+                    <Posts uid={profile?.id} username={profile?.full_name} />
                   </main>
                 </section>
               </React.Fragment>
             ) : (
               <section>
                 <header className="w-full flex flex-col sm:flex-row sm:items-center justify-between mb-8">
-                  <h3 className="text-2xl">
-                    {userProfile?.full_name}'s posts.
-                  </h3>
+                  <h3 className="text-2xl">{profile?.full_name}'s posts.</h3>
                 </header>
                 <main>
-                  <Posts
-                    uid={userProfile?.id}
-                    username={userProfile?.full_name}
-                  />
+                  <Posts uid={profile?.id} username={profile?.full_name} />
                 </main>
               </section>
             )}

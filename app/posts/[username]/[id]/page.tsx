@@ -29,6 +29,10 @@ export default async function Page({
     .from("posts")
     .getPublicUrl(post.file_url);
 
+  const {
+    data: { user: user },
+  } = await supabase.auth.getUser();
+
   return (
     <div
       className="flex-1 w-full flex flex-col gap-20 items-center px-4"
@@ -80,6 +84,44 @@ export default async function Page({
         </header>
         <div className="divider"></div>
         <Post fileUrl={post.file_url} />
+        {!user && post && (
+          <Link
+            className="alert alert-info mt-32 hover:opacity-80 transition-all animate-in"
+            href="/"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              className="stroke-current shrink-0 w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              ></path>
+            </svg>
+            <span>
+              start your own blog. free, open-source, markdown powered.
+            </span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              data-slot="icon"
+              className="w-5 h-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
+              />
+            </svg>
+          </Link>
+        )}
       </main>
       <Footer />
     </div>

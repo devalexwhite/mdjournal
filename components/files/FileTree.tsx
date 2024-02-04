@@ -6,18 +6,24 @@ export type MdFile = {
 interface FileTreeProps {
   files?: Array<MdFile>;
   onSelect: (file: MdFile) => {};
+  selectedName?: string;
 }
 
 const FileRow = ({
   file,
   onSelect,
+  selected,
 }: {
   file: MdFile;
   onSelect: (file: MdFile) => {};
+  selected: boolean;
 }) => {
   return (
     <li>
-      <button onClick={() => onSelect(file)}>
+      <button
+        className={`${selected ? "active" : ""} py-3 px-4 text-sm`}
+        onClick={() => onSelect(file)}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -38,12 +44,21 @@ const FileRow = ({
   );
 };
 
-export default function FileTree({ files, onSelect }: FileTreeProps) {
+export default function FileTree({
+  files,
+  onSelect,
+  selectedName,
+}: FileTreeProps) {
   return (
     <ul className="menu menu-xs bg-base-200 w-full h-full p-3">
       {files &&
         files.map((file: MdFile) => (
-          <FileRow onSelect={onSelect} file={file} />
+          <FileRow
+            key={file.name}
+            onSelect={onSelect}
+            selected={file.name == selectedName}
+            file={file}
+          />
         ))}
     </ul>
   );

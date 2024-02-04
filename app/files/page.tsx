@@ -23,7 +23,6 @@ export default async function Page() {
   return (
     <div className="w-screen h-screen flex items-center justify-center bg-gradient-to-t from-primary to-accent p-16">
       <div className="card bg-base-100 shadow-xl w-full h-full   overflow-hidden">
-        <div className="w-full h-12 bg-base-300"></div>
         <FileApp files={files} />
       </div>
     </div>

@@ -6,7 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@mdxeditor/editor": "^2.5.1",
+    "@mdxeditor/editor": "2.5.1",
     "@react-three/drei": "^9.97.0",
     "@react-three/fiber": "^8.15.16",
     "@supabase/auth-helpers-nextjs": "^0.8.7",

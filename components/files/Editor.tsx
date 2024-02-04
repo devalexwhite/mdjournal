@@ -1,33 +1,55 @@
-"use client";
-
-import { MDXEditor, MDXEditorMethods, MDXEditorProps } from "@mdxeditor/editor";
+import {
+  BlockTypeSelect,
+  BoldItalicUnderlineToggles,
+  MDXEditor,
+  UndoRedo,
+  headingsPlugin,
+  imagePlugin,
+  listsPlugin,
+  markdownShortcutPlugin,
+  quotePlugin,
+  thematicBreakPlugin,
+  toolbarPlugin,
+} from "@mdxeditor/editor";
 import "@mdxeditor/editor/style.css";
-import dynamic from "next/dynamic";
-import { forwardRef } from "react";
-import { render } from "react-dom";
+import { Suspense, useRef } from "react";
 
 interface EditorProps {
   markdown: string;
+  onChange: (markdown: string) => {};
 }
 
-const MdxEditor = dynamic(() => import("./InitalizedMDXEditor"), {
-  // Make sure we turn SSR off
-  ssr: false,
-});
+export default function Editor({ markdown, onChange }: EditorProps) {
+  const ref = useRef(null) as any;
 
-const ForwardRefEditor = forwardRef<MDXEditorMethods, MDXEditorProps>(
-  (props, ref) => <MdxEditor {...props} editorRef={ref} />,
-);
-
-export default function Editor({ markdown }: EditorProps) {
   return (
-    <div>
-      <ForwardRefEditor
-        contentEditableClassName="prose lg:prose-xl"
+    <Suspense fallback={null}>
+      <MDXEditor
+        className="w-full h-full max-h-full max-w-full"
+        ref={ref}
+        onChange={console.log}
+        plugins={[
+          toolbarPlugin({
+            toolbarContents: () => (
+              <>
+                {" "}
+                <UndoRedo />
+                <BoldItalicUnderlineToggles />
+                <BlockTypeSelect />
+              </>
+            ),
+          }),
+          headingsPlugin(),
+          listsPlugin(),
+          quotePlugin(),
+          thematicBreakPlugin(),
+          markdownShortcutPlugin(),
+          imagePlugin(),
+        ]}
         markdown={markdown}
-        className="w-full h-full"
+        contentEditableClassName="prose"
       />
-    </div>
+    </Suspense>
   );
 }
 

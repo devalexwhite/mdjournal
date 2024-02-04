@@ -5,14 +5,14 @@ import Link from "next/link";
 export default function ShelfPost({ post }: { post: any }) {
   const trimTitle = (title: string) => {
     if (title.length <= 20) return title;
-    else return `${title.substring(0, 20)}...`;
+    else return `${title.substring(0, 16)}...`;
   };
 
   return (
     <Link href={`/`} className="relative">
       <div
-        style={{ background: 'url("/leather.jpg")' }}
-        className="book bg-cover bg-center hover:-translate-y-4 transition-all w-16 h-64 bg-base-100 relative flex flex-col text-white"
+        style={{ background: 'url("/paper.jpg")' }}
+        className="book bg-cover bg-center rounded-t hover:-translate-y-4 transition-all w-16 h-64 bg-base-100 relative flex flex-col text-black"
       >
         <span className="indicator-item badge absolute -top-2 -right-2 badge-secondary pointer-events-none">
           5

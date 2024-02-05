@@ -5,7 +5,9 @@ import ShelfPost from "./ShelfPost";
 export default function Shelf({ posts }: { posts: Array<any> }) {
   return (
     <section className="w-full">
-      <header className="mb-6 px-8 w-full text-2xl font-bold">Shelf</header>
+      <header className="mt-12 mb-16 text-gray-50 px-8 w-full text-4xl font-black">
+        <span className="">Your Journals</span>
+      </header>
       <div className="w-full z-10 relative">
         <ul className="flex flex-row px-8 h-64 gap-8">
           {posts.map((post) => (
